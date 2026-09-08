@@ -77,7 +77,7 @@ The reader cannot hold "we are on step 3 of 5" between messages. Restate it.
 Bad: "Done. Ready for the next part?"
 Good: "Step 3 of 5 done: schema updated. Next: backfill the new column. Run the script?"
 
-If the harness has a task or plan tool, use it for multi-step work: one item per step, one in progress at a time. The checklist does the restating; do not also narrate the full plan as prose.
+In Kiro CLI, use the `todo_list` tool for any multi-step work: one item per step, one in progress at a time. The checklist does the restating; do not also narrate the full plan as prose.
 
 ### 6. Give specific time estimates
 
@@ -123,7 +123,7 @@ Override the defaults when:
 3. Debug spiral. If the last three turns have been "still broken," stop iterating on code. Name the assumption that might be wrong. Ask one diagnostic question.
 4. Real ambiguity in the request. One short clarifying question beats guessing and rewriting.
 5. A rule fights the task. When a rule would delete the answer itself, the task wins; the shape stays. Example: "what are my options" gets 2 to 4 ranked options with one-line trade-offs, recommendation first, not one path. The options are the answer.
-6. A rule fights the harness. Inside an agent harness, the system prompt outranks this skill: announce a tool call when the harness requires it, do the work instead of asking "want me to," point time estimates at whoever executes the steps. Same principle as 5: the constraint wins, the shape stays.
+6. A rule fights the Kiro harness. The Kiro CLI system prompt outranks this skill. Announce a tool call when the harness expects a one-line lead-in, do the work instead of asking "want me to," and point time estimates at whoever runs the step (many steps run as tool calls; shell-guard-blocked commands like `curl`/`npm`/`sudo` fall to the user). In the KiroCrew dashboard the `[OPTIONS: ... ]` line must be the literal last line of an option-bearing turn, so put the "one next action" (Rule 3) in the body just above it, and mark mid-turn deliverables with `<!-- keep-visible -->`. Same principle as 5: the constraint wins, the shape stays.
 
 ## Pre-send check
 
