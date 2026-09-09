@@ -1,8 +1,8 @@
-# i-have-adhd (Kiro edition)
+# kiro-has-adhd (Kiro edition)
 
 **ADHD-friendly outputs for Kiro CLI. No ADHD diagnosis needed.**
 
-A Kiro-only fork of [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd), stripped to the single `SKILL.md` Kiro consumes and rewritten so its harness references point at Kiro (the `todo_list` tool, the KiroCrew dashboard `[OPTIONS:]` convention, the shell guard). All other-runtime plumbing (Claude/Codex/Pi/OMP/OpenCode/Gemini/Qwen/Kimi plugins, translations, tests, evals) has been removed.
+A Kiro-only fork of [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd), stripped to the single `SKILL.md` Kiro consumes and rewritten so its harness references point at Kiro (the `todo_list` tool, the KiroCrew dashboard `[OPTIONS:]` convention, the shell guard). The skill is renamed `kiro-has-adhd`. All other-runtime plumbing (Claude/Codex/Pi/OMP/OpenCode/Gemini/Qwen/Kimi plugins, translations, tests, evals) has been removed.
 
 ## What it does
 
@@ -19,21 +19,26 @@ Kiro reads Agent Skills natively from `~/.kiro/skills/<name>/SKILL.md`.
 2. Copy the skill into Kiro's skills directory:
    ```bash
    mkdir -p ~/.kiro/skills
-   cp -R i-have-adhd/skills/i-have-adhd ~/.kiro/skills/
+   cp -R i-have-adhd/skills/kiro-has-adhd ~/.kiro/skills/
    ```
 3. Start a new Kiro session and invoke it:
    ```text
-   /i-have-adhd
+   /kiro-has-adhd
    ```
+
+Or install with the skills CLI (auto-copies, scoped to Kiro):
+```bash
+npx skills add kkautenburger/i-have-adhd -a kiro-cli -y
+```
 
 `disable-model-invocation: true` keeps it off until you invoke it. It stays on until you say "stop adhd mode" or "normal mode".
 
 ### Always-on (optional)
 
-Kiro's analog of the Claude `SessionStart` hook is a steering file. Create `~/.kiro/steering/i-have-adhd-always-on.md`:
+Kiro's analog of the Claude `SessionStart` hook is a steering file. Create `~/.kiro/steering/kiro-has-adhd-always-on.md`:
 
 ```markdown
-Activate the `i-have-adhd` skill (`~/.kiro/skills/i-have-adhd/SKILL.md`) from the
+Activate the `kiro-has-adhd` skill (`~/.kiro/skills/kiro-has-adhd/SKILL.md`) from the
 first response, without waiting for the user to ask.
 
 Overrides:
@@ -49,7 +54,7 @@ Steering loads at session start, so it takes effect in the next session. Delete 
 
 ## The rules
 
-10 rules. Full text in [SKILL.md](./skills/i-have-adhd/SKILL.md).
+10 rules. Full text in [SKILL.md](./skills/kiro-has-adhd/SKILL.md).
 
 1. Lead with the next action.
 2. Number multi-step tasks.
@@ -64,7 +69,7 @@ Steering loads at session start, so it takes effect in the next session. Delete 
 
 ## Tune it
 
-Edit `skills/i-have-adhd/SKILL.md`, then re-copy it into `~/.kiro/skills/i-have-adhd/` and start a new session.
+Edit `skills/kiro-has-adhd/SKILL.md`, then re-copy it into `~/.kiro/skills/kiro-has-adhd/` and start a new session.
 
 ## Credits
 
