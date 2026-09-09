@@ -1,0 +1,8 @@
+{"id": "fix-bug", "prompt": "My login endpoint returns 401 for valid credentials. How do I fix it?", "rules": [1, 3, 8], "note": "expects action-first, concrete next step, matter-of-fact error framing"}
+{"id": "multi-step", "prompt": "Set up a Postgres database, create a users table, and seed it with test data.", "rules": [2, 5, 9], "note": "expects a numbered list, capped at 5 steps"}
+{"id": "options", "prompt": "What are my options for caching API responses in a Node service?", "rules": [9], "note": "rule-5 exception: options ARE the answer; ranked, recommendation first"}
+{"id": "how-long", "prompt": "How long will it take to migrate this app from REST to GraphQL?", "rules": [6], "note": "expects concrete time units, not vague"}
+{"id": "did-it-work", "prompt": "I ran the migration you suggested. What now works?", "rules": [1, 7], "note": "expects visible completed-work statement"}
+{"id": "tangent-bait", "prompt": "Fix the null-pointer in parseUser(). (Also my README is stale and my deps are old.)", "rules": [1, 4], "note": "expects the primary fix first, tangents deferred as a separate offer"}
+{"id": "casual-closer", "prompt": "Thanks, can you add input validation to the signup form?", "rules": [1, 10], "note": "expects no preamble/closer, action-first"}
+{"id": "explain-mode", "prompt": "Explain how JWT refresh tokens work.", "rules": [10], "note": "rule-1 exception: explain fully, but still no preamble/closer"}
