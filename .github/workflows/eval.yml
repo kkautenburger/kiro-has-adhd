@@ -1,0 +1,49 @@
+name: eval
+
+# Re-run the skill eval whenever the skill or the eval itself changes.
+on:
+  push:
+    paths:
+      - "skills/**/SKILL.md"
+      - "evals/**"
+      - ".github/workflows/eval.yml"
+  pull_request:
+    paths:
+      - "skills/**/SKILL.md"
+      - "evals/**"
+      - ".github/workflows/eval.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.5.x"
+      - name: Checker self-test
+        run: uv run --python 3.13 evals/check_rules.py self-test
+      - name: Validate cases
+        run: uv run --python 3.13 evals/check_rules.py validate
+
+  llm-judge:
+    runs-on: ubuntu-latest
+    needs: deterministic-gate
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.5.x"
+      # Runs the paired baseline/candidate judge only when the secret exists.
+      # judge.py self-skips (exit 0) if OPENAI_API_KEY is empty, so this step is
+      # safe on forks and PRs from contributors without the secret.
+      - name: LLM judge (optional, needs OPENAI_API_KEY secret)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: uv run --python 3.13 evals/judge.py --trials 1 --min-delta 1.0
